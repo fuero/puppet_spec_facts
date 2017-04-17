@@ -15,6 +15,7 @@ module PuppetSpecFacts
   def self.puppet_platforms
     platforms = {}
     file_list = Dir.glob("#{@proj_root}/**/*.json")
+    file_list += Dir.glob("#{ENV['FACTS_DIR']}/**/*.json") if ENV['FACTS_DIR']
     file_list.each do |filename|
       fact_hash = get_jsonfile(filename)
       platform_name = make_sane_name(fact_hash)
